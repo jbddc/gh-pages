@@ -1,3 +1,29 @@
+#!/bin/bash
+shopt -s extglob
+
+function error_exit
+{
+    echo "$1" 1>&2
+    exit 1
+}
+
+
+# Check if commit message argument
+if [ -z "$1" ]
+then
+    echo "deploy script error: What changes did you make? Type a commit message."
+    exit 1
+fi
+
+#Build successfuly or exit
+stack clean
+stack build || error\_exit "deploy script error: Build failed"
+
+#Push changes on develop branch to github
+git add -A
+git commit -m "$1" || error\_exit "deploy script error: No changes to commit"
+git push -u origin develop
+
 # Temporarily store uncommited changes
 git stash
 
