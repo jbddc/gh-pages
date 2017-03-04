@@ -2,7 +2,7 @@
 git stash
 
 # Verify correct branch
-git checkout dev
+git checkout develop
 
 # Build new files
 stack exec site clean
