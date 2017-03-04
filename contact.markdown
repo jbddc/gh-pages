@@ -3,5 +3,6 @@ title: Contact
 headerImg: beach.jpg
 ---
 
-You can contact me on twitter or email me: jbernardo at gmail dot com
-PGP Key:
+You can contact me on [Twitter](https://www.twitter.com/jbddc) or via [email](mailto:jbernardoddc@gmail.com).
+
+PGP Key: TODO
