@@ -5,8 +5,8 @@ git stash
 git checkout develop
 
 # Build new files
-stack exec site clean
-stack exec site build
+stack exec website clean
+stack exec website build
 
 # Get previous files
 git fetch --all
@@ -29,6 +29,6 @@ git commit -m "Publish."
 git push origin master:master
 
 # Restoration
-git checkout dev
+git checkout develop
 git branch -D master
 git stash pop
