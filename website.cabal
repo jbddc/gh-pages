@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 executable website
   main-is:             site.hs
-  extensions:          OverloadedStrings
+  default-extensions:          OverloadedStrings
   default-language:    Haskell2010
   ghc-options:         -threaded
   build-depends:       base == 4.*,
