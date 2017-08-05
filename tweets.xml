@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Bernas Website</title>
+    <link href="https://jbddc.github.io/tweets.xml" rel="self" />
+    <link href="https://jbddc.github.io" />
+    <id>https://jbddc.github.io/tweets.xml</id>
+    <author>
+        <name>Bernas</name>
+        <email>jbernardoddc@gmail.com</email>
+    </author>
+    <updated>2017-03-04T00:00:00Z</updated>
+    <entry>
+    <title>Hello, World!</title>
+    <link href="https://jbddc.github.io/posts/2017-03-04-hello-world.html" />
+    <id>https://jbddc.github.io/posts/2017-03-04-hello-world.html</id>
+    <published>2017-03-04T00:00:00Z</published>
+    <updated>2017-03-04T00:00:00Z</updated>
+    <summary type="html"><![CDATA[First Post!]]></summary>
+</entry>
+
+</feed>

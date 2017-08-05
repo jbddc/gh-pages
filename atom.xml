@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Bernas Website</title>
+    <link href="https://jbddc.github.io/atom.xml" rel="self" />
+    <link href="https://jbddc.github.io" />
+    <id>https://jbddc.github.io/atom.xml</id>
+    <author>
+        <name>Bernas</name>
+        <email>jbernardoddc@gmail.com</email>
+    </author>
+    <updated>2017-03-04T00:00:00Z</updated>
+    <entry>
+    <title>Hello, World!</title>
+    <link href="https://jbddc.github.io/posts/2017-03-04-hello-world.html" />
+    <id>https://jbddc.github.io/posts/2017-03-04-hello-world.html</id>
+    <published>2017-03-04T00:00:00Z</published>
+    <updated>2017-03-04T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March  4, 2017
+    
+        by João Bernardo Costa
+    
+</div>
+
+<p>Hello, World! :)</p>
+<p>This will be my blog where I post interesting crap I find in my personal &amp; work life experience.</p>
+<p>Stay tuned, I’ll be back soon! 😎</p>
+]]></summary>
+</entry>
+
+</feed>
