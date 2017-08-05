@@ -10,6 +10,10 @@ import 		     Text.Pandoc
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
+    match "keybase.txt" $ do
+        route idRoute
+        compile copyFileCompiler
+
     match "static/*/*" $ do
 	route idRoute
 	compile copyFileCompiler
