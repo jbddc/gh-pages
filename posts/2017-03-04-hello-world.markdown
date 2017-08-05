@@ -1,6 +1,7 @@
 ---
 title: Hello, World!
 author: João Bernardo Costa
+description: First Post!
 ---
 
 Hello, World! :)

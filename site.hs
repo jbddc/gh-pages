@@ -1,34 +1,45 @@
 --------------------------------------------------------------------------------
-module Main where
-
 {-# LANGUAGE OverloadedStrings #-}
+
+module Main (feedFromCtx, main) where
+
+
 import           Data.Monoid (mappend)
 import           Hakyll
-import 		     Text.Pandoc
+import           Data.List        (isPrefixOf, isSuffixOf)
+import           System.FilePath  (takeFileName)
 
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
-    match "keybase.txt" $ do
-        route idRoute
+main = hakyllWith config $ do
+    match ("favicon.ico"
+           .||. "404.html"
+           .||. "images/*"
+           .||. "images/*/*"
+           .||. "robots.txt"
+           .||. "keybase.txt"
+           .||. "presentations/*"
+           .||. "papers/*"
+           .||. (fromRegex "\\.widely.*")) $ do
+        route   idRoute
         compile copyFileCompiler
 
-    match "static/*/*" $ do
-	route idRoute
-	compile copyFileCompiler
+    match "css/*" $ do
+        route   idRoute
+        compile compressCssCompiler
 
-    match (fromList ["about.md", "contact.markdown"]) $ do
+    match "*.md" $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
-	    >>= loadAndApplyTemplate "templates/page.html" siteCtx
-            >>= loadAndApplyTemplate "templates/default.html" siteCtx
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
+            >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
@@ -37,45 +48,65 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
+                    constField "description" "Posts"         `mappend`
                     listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
-                    siteCtx
+                    constField "title" "Posts"               `mappend`
+                    defaultContext
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-
-    match "index.html" $ do
+    create ["atom.xml"] $ do
         route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
-                    siteCtx
+        compile $ feedFromCtx $ bodyField "description" `mappend` postCtx
 
-            getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
-                >>= relativizeUrls
+
+    create ["tweets.xml"] $ do
+        route idRoute
+        compile $ feedFromCtx $ postCtx
 
     match "templates/*" $ compile templateCompiler
 
+
+feedFromCtx :: Context String -> Compiler (Item String)
+feedFromCtx feedCtx = do
+    posts <- fmap (take 10) . recentFirst =<<
+        loadAllSnapshots "posts/*" "content"
+    renderAtom myFeedConfiguration feedCtx posts
+
+
+--------------------------------------------------------------------------------
+
+config = defaultConfiguration
+         { ignoreFile = ignoreFile'
+         , deployCommand = "pushd _site && widely push && popd"
+         }
+  where
+    ignoreFile' path
+        | ".widely"    `isPrefixOf` fileName = False
+        | "."    `isPrefixOf` fileName = True
+        | "#"    `isPrefixOf` fileName = True
+        | "~"    `isSuffixOf` fileName = True
+        | ".swp" `isSuffixOf` fileName = True
+        | otherwise                    = False
+      where
+        fileName = takeFileName path
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
-    siteCtx 
-
-siteCtx :: Context String
-siteCtx = 
-    constField "baseurl" "https://jbddc.github.io" `mappend` 
-    constField "site_description" "Thoughts & Rambles" `mappend`
-    constField "instagram_username" "joaobernardocosta" `mappend`
-    constField "twitter_username" "jbddc" `mappend`
-    constField "github_username" "jbddc" `mappend`
-    --constField "google_username" "" `mappend`
     defaultContext
+
+
+
+myFeedConfiguration :: FeedConfiguration
+myFeedConfiguration = FeedConfiguration
+    { feedTitle       = "Bernas Website"
+    , feedDescription = "Personal website of João Bernardo Dias da Costa"
+    , feedAuthorName  = "Bernas"
+    , feedAuthorEmail = "jbernardoddc@gmail.com"
+    , feedRoot        = "https://jbddc.github.io"
+    }

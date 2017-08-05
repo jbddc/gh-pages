@@ -20,4 +20,5 @@ executable website
   ghc-options:         -threaded
   build-depends:       base == 4.*,
                        hakyll == 4.9.*,
-                       pandoc == 1.19.*
+                       pandoc == 1.19.*,
+                       filepath

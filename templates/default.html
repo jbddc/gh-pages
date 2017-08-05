@@ -1,22 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    $partial("templates/head.html")$
-    <body>
-	<div id="preloader">
-	    <div id="status">
-
-	    </div>
-
-	</div>  
-	$partial("templates/nav.html")$
-
-        <div id="content">
-            $body$
-        </div>
-        <div id="footer">
-        </div>
-      $partial("templates/footer.html")$
-    </body>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>$title$ - HaskellMN</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jbddc" />
+    <meta name="twitter:title" content="$title$" />
+    <meta name="twitter:description" content="$description$" />
+    <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/883690795395665920/oPcYvrrY_400x400.jpg" />
+    <meta name="description" content="$description$">
+    <link rel="stylesheet" type="text/css" href="/css/syntax.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/markdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/haskellmn.css"/>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+      inlineMath: [ ["\\(","\\)"] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+      },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body>
+<header>
+    <h1><i>bernas.lan</i></h1>
+    <h2> thoughts & rambles</h2>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/archive.html">Posts</a>
+        <a href="https://twitter.com/jbddc">Twitter</a>
+        <a href="https://github.com/jbddc">GitHub</a>
+        <a href="">LinkedIn (TBD)</a>
+        <a href="">CV (TBD)</a>
+    </nav>
+</header>
+<article>
+<h2>$title$</h2>
+$body$
+</article>
+<footer>
+    <hr>
+    <p>Made with <a href="http://jaspervdj.be/hakyll/">Hakyll</a> using  <a href="https://github.com/HaskellMN/www.haskell.mn/tree/3e4284a4499fdec8b7ae49815c188cc82a8b860c">HaskellMN's theme</a>.</p>
+    <p>©<script>document.write(new Date().getFullYear().toString())</script>
+    $if(author)$$author$$else$João Bernardo Dias da Costa$endif$</p>
+</footer>
+</body>
 </html>
