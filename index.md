@@ -3,7 +3,7 @@ description: Home Page
 title: Greetings! 
 ---
 
-I'm a junior progammer currently on my last year of a Computer Science MSc. 
+I'm a junior progammer currently on my last year of a Computer Science MSc degree. 
 
 My interests revolve around functional programming, blockchain decentralized distributed systems and smart contracts development. 
 
