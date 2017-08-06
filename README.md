@@ -2,6 +2,5 @@
 
 This is my personal blog created with [Hakyll](https://jaspervdj.be/hakyll/).
 
-The theme was created by [Katy Chuang](http://katychuang.com) and can be found
-[here](https://github.com/katychuang/CleanMagic-hakyll).
+Theme used can be found [here](https://github.com/HaskellMN/www.haskell.mn/tree/3e4284a4499fdec8b7ae49815c188cc82a8b860c).
 
